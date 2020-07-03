@@ -3,7 +3,22 @@ import random
 
 word = ['python', 'java', 'kotlin', 'javascript']
 game_word = random.choice(word)
-num_hyphens = len(game_word) - 3
+set_word = set(game_word)
+output = list('-' * len(game_word))
+attempts = 8
 print("H A N G M A N")
-guess = input(f"Guess the word {game_word[:3] + '-' * num_hyphens}: ")
-print("You survived!") if guess == game_word else print("You are hanged!")
+while attempts > 0:
+    print("""
+{}""".format(''.join(output)))
+    guess = input("Input a letter: ")
+    if guess in set_word:
+        for i in range(len(game_word)):
+            if game_word[i] == guess:
+                output[i] = guess
+        attempts -= 1
+    else:
+        print("No such letter in the word")
+        attempts -= 1
+print("""
+Thanks for playing!
+We'll see how well you did in the next stage""")
